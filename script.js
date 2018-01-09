@@ -24,7 +24,7 @@ function generatePad() {
       let newDiv = document.createElement('div');
       newDiv.style.width = squareSize;
       newDiv.style.height = squareSize;
-      newDiv.classList.add('empty');
+      emptySquare(newDiv);
       hSketchpadArea.appendChild(newDiv);
     }
   }
@@ -46,20 +46,37 @@ function findSquareIndex(target) {
   return i;
 }
 
+function emptySquare(target) {
+  target.setAttribute("style", `
+      background-color: hsl(220, 50%, 95%);
+      border-style: dotted;
+      border-width: 1px;
+      border-color: hsl(220, 20%, 75%);`);
+}
+
 function fillSquare(e) {
   if (e.target !== e.currentTarget && (isMouseDown == true || e.type == 'mousedown')) {
 
     if (document.querySelector('#wacky').checked == false) {
-      e.target.classList.add('filled');
-      e.target.classList.remove('empty');
+      e.target.setAttribute("style", `
+          background-color: hsl(220, 10%, 10%);
+          border-style: solid;
+          border-width: 1px;
+          border-color: hsl(220, 10%, 10%);`);
     }
     else {
       let squareIndex = findSquareIndex(e.target);
-      let b = squareBrightness[squareIndex]
-      e.target.setAttribute("style",`background-color:
-          hsl(${Math.random()*360}, ${Math.random()*100}%, ${b}%)`);
-      e.target.classList.remove('empty');
-      e.target.classList.remove('filled');
+      let color_hue = Math.random()*360;
+      let color_saturation = Math.random()*100;
+      let color_brightness = squareBrightness[squareIndex];
+
+      e.target.setAttribute("style",`
+          background-color:
+          hsl(${color_hue}, ${color_saturation}%, ${color_brightness}%);
+          border-style: solid;
+          border-width: 1px;
+          border-color:
+          hsl(${color_hue}, ${color_saturation}%, ${color_brightness}%);`);
 
       if (squareBrightness[squareIndex] >= 5)
         squareBrightness[squareIndex] -= 5;

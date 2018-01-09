@@ -89,17 +89,3 @@ div#sketchpad-area {
   display: grid;
   box-shadow: 4px 4px 8px black;
 }
-
-.empty {
-  background-color: hsl(220, 50%, 95%);
-  border-style: dotted;
-  border-width: 1px;
-  border-color: hsl(220, 20%, 75%);
-}
-
-.filled {
-  background-color: hsl(220, 10%, 10%);
-  border-style: solid;
-  border-width: 1px;
-  border-color: hsl(220, 10%, 10%);
-}
